@@ -2,7 +2,7 @@
 
 Compile code into latex for icpc notebooks
 
-Reads from ./config.ron and ./layout.txt and outputs to out.tex
+Reads from ```./config.ron``` and ```./layout.txt``` and outputs to ```./out.tex```
 
 To then compile to pdf you can do
 ```sh
