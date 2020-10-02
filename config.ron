@@ -27,6 +27,6 @@ Config(
 	frame: single,  //none,leftline,topline,bottomline,lines,single
 	framestep: "1mm",    // distance between frame and content in
 	framerule: "0.2pt", // frame thickness
-	style: "fancy",     // pygment style
+	style: "algol_nu",     // pygmentize -L styles
 )
 

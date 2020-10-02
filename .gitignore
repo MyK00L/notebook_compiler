@@ -12,5 +12,7 @@ Cargo.lock
 # Ignore Compiled notebook
 out.tex
 
+layout_maker
+
 /tmp/
 

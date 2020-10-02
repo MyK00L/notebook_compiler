@@ -82,7 +82,7 @@ struct Config {
 	// minted options:
 	tabsize: u8,
 	linenos: bool,
-	numbersep: String,         // numbers distance in mm
+	numbersep: String,     // numbers distance in mm
 	mathescape: bool,      // use math in comments
 	autogobble: bool,      // remove unecessary whitespace
 	showspaces: bool,      // render spaces with another character
@@ -92,7 +92,7 @@ struct Config {
 	breakautoindent: bool, // indent broken lines
 	fontfamily: String,
 	frame: FrameType,  //none,leftline,topline,bottomline,lines,single
-	framestep: String,    // distance between frame and content
+	framestep: String, // distance between frame and content
 	framerule: String, // frame thickness
 	style: String,     // pygment style
 }
@@ -103,9 +103,6 @@ enum LineType {
 	SubSection(String),
 	File(String),
 }
-
-// config.ron
-// layout.txt
 
 fn get_extension(s: &str) -> String {
 	s.split('.').last().unwrap().to_string()
@@ -133,12 +130,23 @@ fn decode_layout(s: &str) -> Vec<LineType> {
 fn main() -> Result<(), Box<dyn std::error::Error>> {
 	let config: Config = ron::de::from_reader(std::fs::File::open("config.ron")?)?;
 	let layout = decode_layout(&std::fs::read_to_string("layout.txt")?);
-	let mut extensions: HashMap<String,String> = HashMap::new();
+	let mut extensions: HashMap<String, String> = HashMap::new();
 	for i in layout.iter() {
 		if let LineType::File(x) = i {
 			let ext = get_extension(x);
-			if !ext.is_empty() && !extensions.contains_key(&ext){
-				extensions.insert(ext,String::from_utf8(std::process::Command::new("pygmentize").arg("-N").arg(&x).output()?.stdout)?.trim().to_string());
+			if !ext.is_empty() && !extensions.contains_key(&ext) {
+				extensions.insert(
+					ext,
+					String::from_utf8(
+						std::process::Command::new("pygmentize")
+							.arg("-N")
+							.arg(&x)
+							.output()?
+							.stdout,
+					)?
+					.trim()
+					.to_string(),
+				);
 			}
 		}
 	}
@@ -193,9 +201,17 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 			}
 			LineType::File(x) => {
 				let ext = get_extension(&x);
-				writeln!(tex, "\\begin{{{}code}}", extensions.get(&ext).unwrap_or(&String::from("text")))?;
+				writeln!(
+					tex,
+					"\\begin{{{}code}}",
+					extensions.get(&ext).unwrap_or(&String::from("text"))
+				)?;
 				writeln!(tex, "{}", std::fs::read_to_string(&x)?)?;
-				writeln!(tex, "\\end{{{}code}}", extensions.get(&ext).unwrap_or(&String::from("text")))?;
+				writeln!(
+					tex,
+					"\\end{{{}code}}",
+					extensions.get(&ext).unwrap_or(&String::from("text"))
+				)?;
 			}
 		}
 	}
