@@ -92,7 +92,7 @@ struct Config {
 	breakautoindent: bool, // indent broken lines
 	fontfamily: String,
 	frame: FrameType,  //none,leftline,topline,bottomline,lines,single
-	framesep: String, // distance between frame and content
+	framesep: String,  // distance between frame and content
 	framerule: String, // frame thickness
 	style: String,     // pygment style
 }
@@ -125,6 +125,26 @@ fn decode_layout(s: &str) -> Vec<LineType> {
 			}
 		})
 		.collect()
+}
+
+fn escape(s: &str) -> String {
+	let mut res = String::with_capacity(s.len());
+	for c in s.chars() {
+		match c {
+			'&' => res.push_str(r#"\&"#),
+			'%' => res.push_str(r#"\%"#),
+			'$' => res.push_str(r#"\$"#),
+			'#' => res.push_str(r#"\#"#),
+			'_' => res.push_str(r#"\_"#),
+			'{' => res.push_str(r#"\{"#),
+			'}' => res.push_str(r#"\}"#),
+			'~' => res.push_str(r#"\texttt{\~{}}"#),
+			'^' => res.push_str(r#"\^{}"#),
+			'\\' => res.push_str(r#"$\backslash$"#),
+			_ => res.push(c),
+		}
+	}
+	res
 }
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
@@ -194,10 +214,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	for layout_line in layout {
 		match layout_line {
 			LineType::Section(x) => {
-				writeln!(tex, "\\section{{{}}}", x)?;
+				writeln!(tex, "\\section{{{}}}", escape(&x))?;
 			}
 			LineType::SubSection(x) => {
-				writeln!(tex, "\\subsection{{{}}}", x)?;
+				writeln!(tex, "\\subsection{{{}}}", escape(&x))?;
 			}
 			LineType::File(x) => {
 				let ext = get_extension(&x);

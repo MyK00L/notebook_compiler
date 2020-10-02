@@ -16,7 +16,7 @@ Config(
 	tabsize: 2,
 	linenos: false,
 	numbersep: "1mm",        // numbers distance
-	mathescape: true,      // use math in comments
+	mathescape: false,      // use math in comments
 	autogobble: true,      // remove unecessary whitespace
 	showspaces: false,      // render spaces with another character
 	showtabs: false,        // render tabs with another character
