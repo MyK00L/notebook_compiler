@@ -1,20 +1,21 @@
 Config(
 	layout: a4paper,
 	landscape: true,
-	lmargin: 8, // left margin in mm
-	rmargin: 8, // right margin in mm
-	tmargin: 16, // top margin in mm
-	bmargin: 8, // bottom marin in mm
+	lmargin: "2mm", // left margin
+	rmargin: "2mm", // right margin
+	tmargin: "16mm", // top margin
+	bmargin: "2mm", // bottom marin
 	title: "ICPC Notebook",
 	author: "Me",
 	ncols: 3,         // number of columns for code
 	ncolstoc: 4,      // number of columns for table of contents
+	columnsep: "2mm", // columns separation
 	separatetoc: true, // wether to put the table of contents on a separate page
 	fontsize: "10pt",
 	// minted options:
 	tabsize: 2,
-	linenos: true,
-	numbersep: 2,        // numbers distance in mm
+	linenos: false,
+	numbersep: "1mm",        // numbers distance
 	mathescape: true,      // use math in comments
 	autogobble: true,      // remove unecessary whitespace
 	showspaces: false,      // render spaces with another character
@@ -24,7 +25,7 @@ Config(
 	breakautoindent: false, // indent broken lines
 	fontfamily: "tt",
 	frame: single,  //none,leftline,topline,bottomline,lines,single
-	framestep: 1,    // distance between frame and content in mm
+	framestep: "1mm",    // distance between frame and content in
 	framerule: "0.2pt", // frame thickness
 	style: "fancy",     // pygment style
 )
