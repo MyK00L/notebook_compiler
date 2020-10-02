@@ -92,7 +92,7 @@ struct Config {
 	breakautoindent: bool, // indent broken lines
 	fontfamily: String,
 	frame: FrameType,  //none,leftline,topline,bottomline,lines,single
-	framestep: String, // distance between frame and content
+	framesep: String, // distance between frame and content
 	framerule: String, // frame thickness
 	style: String,     // pygment style
 }
@@ -174,7 +174,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	writeln!(tex, "\\author{{{}}}", config.author)?;
 	//writeln!(tex,"\\date{{{:?}}}",std::time::SystemTime::now())?;
 	for i in extensions.iter() {
-		writeln!(tex,"\\newminted{{{}}}{{tabsize={},linenos={},mathescape={},autogobble={},showspaces={},showtabs={},breaklines={},breakanywhere={},breakautoindent={},fontfamily={},frame={},framerule={},style={},numbersep={}}}",i.1,config.tabsize,config.linenos,config.mathescape,config.autogobble,config.showspaces,config.showtabs,config.breaklines,config.breakanywhere,config.breakautoindent,config.fontfamily,config.frame.to_string(),config.framerule,config.style,config.numbersep)?;
+		writeln!(tex,"\\newminted{{{}}}{{tabsize={},linenos={},mathescape={},autogobble={},showspaces={},showtabs={},breaklines={},breakanywhere={},breakautoindent={},fontfamily={},frame={},framerule={},style={},numbersep={},framesep={}}}",i.1,config.tabsize,config.linenos,config.mathescape,config.autogobble,config.showspaces,config.showtabs,config.breaklines,config.breakanywhere,config.breakautoindent,config.fontfamily,config.frame.to_string(),config.framerule,config.style,config.numbersep,config.framesep)?;
 	}
 	writeln!(tex, "\\begin{{document}}")?;
 	if config.ncolstoc > 1 {

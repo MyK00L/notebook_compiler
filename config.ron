@@ -25,7 +25,7 @@ Config(
 	breakautoindent: false, // indent broken lines
 	fontfamily: "tt",
 	frame: single,  //none,leftline,topline,bottomline,lines,single
-	framestep: "1mm",    // distance between frame and content in
+	framesep: "1mm",    // distance between frame and content inside
 	framerule: "0.2pt", // frame thickness
 	style: "algol_nu",     // pygmentize -L styles
 )
