@@ -1,26 +1,26 @@
 Config(
 	layout: a4paper,
 	landscape: true,
-	lmargin: "2mm", // left margin
-	rmargin: "2mm", // right margin
-	tmargin: "16mm", // top margin
-	bmargin: "0mm", // bottom marin
-	headrulewidth: "0.4pt", // head rule thickness
-	footrulewidth: "0.4pt", // foot rule thickness
+	lmargin: "1mm", // left margin
+	rmargin: "1mm", // right margin
+	tmargin: "8mm", // top margin
+	bmargin: "-1mm", // bottom marin
+	headrulewidth: "0.2pt", // head rule thickness
+	footrulewidth: "0.2pt", // foot rule thickness
 	headheight: "3mm", // head height
 	headsep: "1mm", // head separation
-	footskip: "5mm", // foot separation
+	footskip: "3mm", // foot separation
 	title: "ICPC Notebook",
 	author: "Me",
 	ncols: 3,         // number of columns for code
-	ncolstoc: 4,      // number of columns for table of contents
-	columnsep: "2mm", // columns separation
-	separatetoc: true, // wether to put the table of contents on a separate page
-	fontsize: "10pt",
+	ncolstoc: 3,      // number of columns for table of contents
+	columnsep: "1mm", // columns separation
+	separatetoc: false, // wether to put the table of contents on a separate page
+	fontsize: "8pt",
 	// minted options:
 	tabsize: 2,
 	linenos: false,
-	numbersep: "1mm",        // numbers distance
+	numbersep: "0pt",        // numbers distance
 	mathescape: false,      // use math in comments
 	autogobble: true,      // remove unecessary whitespace
 	showspaces: false,      // render spaces with another character
@@ -30,7 +30,7 @@ Config(
 	breakautoindent: false, // indent broken lines
 	fontfamily: "tt",
 	frame: single,  //none,leftline,topline,bottomline,lines,single
-	framesep: "1mm",    // distance between frame and content inside
+	framesep: "2pt",    // distance between frame and content inside
 	framerule: "0.2pt", // frame thickness
 	style: "algol_nu",     // pygmentize -L styles
 )
