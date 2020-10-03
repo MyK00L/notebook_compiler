@@ -193,6 +193,10 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	}
 	writeln!(tex, "\\usepackage{{minted}}")?;
 	writeln!(tex, "\\usepackage{{datetime}}")?;
+	writeln!(tex, "\\usepackage[scaled]{{berasans}}")?;
+	writeln!(tex, "\\usepackage[scaled]{{beramono}}")?;
+	writeln!(tex, "\\renewcommand*\\familydefault{{\\sfdefault}}")?;
+	writeln!(tex, "\\usepackage[T1]{{fontenc}}")?;
 	writeln!(tex, "\\pagestyle{{fancy}}")?;
 	writeln!(tex, "\\lhead{{{}}}", config.title)?;
 	writeln!(tex, "\\rhead{{Page: \\thepage}}")?;
