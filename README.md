@@ -11,15 +11,15 @@ pdflatex --shell-escape out.tex
 
 ## Dependencies
 - tex packages (direct dependencies only)
-    - amsart
-		- geometry
-		- fancyhdr
-    - inputenc
-    - multicol
-    - minted
-    - datetyme
-		- bera
-		- fontenc
+	- amsart
+	- geometry
+	- fancyhdr
+	- inputenc
+	- multicol
+	- minted
+	- datetyme
+	- bera
+	- fontenc
 - [pygmentize](https://pygments.org/)
 
 ## Layout file format
