@@ -4,7 +4,12 @@ Config(
 	lmargin: "2mm", // left margin
 	rmargin: "2mm", // right margin
 	tmargin: "16mm", // top margin
-	bmargin: "2mm", // bottom marin
+	bmargin: "0mm", // bottom marin
+	headrulewidth: "0.4pt", // head rule thickness
+	footrulewidth: "0.4pt", // foot rule thickness
+	headheight: "3mm", // head height
+	headsep: "1mm", // head separation
+	footskip: "5mm", // foot separation
 	title: "ICPC Notebook",
 	author: "Me",
 	ncols: 3,         // number of columns for code

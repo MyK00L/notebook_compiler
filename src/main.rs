@@ -68,10 +68,15 @@ impl std::fmt::Display for FrameType {
 struct Config {
 	layout: PaperType,
 	landscape: bool,
-	lmargin: String, // left margin
-	rmargin: String, // right margin
-	tmargin: String, // top margin
-	bmargin: String, // bottom marin
+	lmargin: String,       // left margin
+	rmargin: String,       // right margin
+	tmargin: String,       // top margin
+	bmargin: String,       // bottom marin
+	headrulewidth: String, // head rule thickness
+	footrulewidth: String, // foot rule thickness
+	headheight: String,    // head height
+	headsep: String,       // head separation
+	footskip: String,      // foot separation
 	title: String,
 	author: String,
 	ncols: u8,         // number of columns for code
@@ -186,9 +191,22 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	writeln!(tex, "\\pagestyle{{fancy}}")?;
 	writeln!(tex, "\\lhead{{{}}}", config.title)?;
 	writeln!(tex, "\\rhead{{Page: \\thepage}}")?;
-	writeln!(tex, "\\rfoot{{}}")?;
-	writeln!(tex, "\\lfoot{{}}")?;
-	writeln!(tex, "\\cfoot{{}}")?;
+	writeln!(tex, "\\rfoot{{\\thepage}}")?;
+	writeln!(tex, "\\lfoot{{\\thepage}}")?;
+	writeln!(tex, "\\cfoot{{\\leftmark}}")?;
+	writeln!(
+		tex,
+		"\\renewcommand{{\\headrulewidth}}{{{}}}",
+		config.headrulewidth
+	)?;
+	writeln!(
+		tex,
+		"\\renewcommand{{\\footrulewidth}}{{{}}}",
+		config.footrulewidth
+	)?;
+	writeln!(tex, "\\setlength{{\\headheight}}{{{}}}", config.headheight)?;
+	writeln!(tex, "\\setlength{{\\headsep}}{{{}}}", config.headsep)?;
+	writeln!(tex, "\\setlength{{\\footskip}}{{{}}}", config.footskip)?;
 	writeln!(tex, "\\setlength{{\\columnsep}}{{{}}}", config.columnsep)?;
 	writeln!(tex, "\\title{{{}}}", config.title)?;
 	writeln!(tex, "\\author{{{}}}", config.author)?;
