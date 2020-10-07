@@ -3,7 +3,7 @@ use std::collections::HashMap;
 use std::io::prelude::*;
 
 #[allow(non_camel_case_types)]
-#[derive(Debug, Clone, Deserialize)]
+#[derive(Debug, Clone, PartialEq, Eq, Deserialize)]
 enum PaperType {
 	a0paper,
 	a1paper,
@@ -79,10 +79,12 @@ struct Config {
 	footskip: String,      // foot separation
 	title: String,
 	author: String,
-	ncols: u8,         // number of columns for code
-	ncolstoc: u8,      // number of columns for table of contents
-	columnsep: String, // columns separation
-	separatetoc: bool, // wether to put the table of contents on a separate page
+	university: String, // university name
+	team: String,       // team name
+	ncols: u8,          // number of columns for code
+	ncolstoc: u8,       // number of columns for table of contents
+	columnsep: String,  // columns separation
+	separatetoc: bool,  // wether to put the table of contents on a separate page
 	fontsize: String,
 	// minted options:
 	tabsize: u8,
@@ -95,11 +97,10 @@ struct Config {
 	breaklines: bool,      // allow linebreaks
 	breakanywhere: bool,   // allow linebreaks anywhere
 	breakautoindent: bool, // indent broken lines
-	fontfamily: String,
-	frame: FrameType,  //none,leftline,topline,bottomline,lines,single
-	framesep: String,  // distance between frame and content
-	framerule: String, // frame thickness
-	style: String,     // pygment style
+	frame: FrameType,      //none,leftline,topline,bottomline,lines,single
+	framesep: String,      // distance between frame and content
+	framerule: String,     // frame thickness
+	style: String,         // pygment style
 }
 
 #[derive(Debug, Clone)]
@@ -156,6 +157,9 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	let config: Config = ron::de::from_reader(std::fs::File::open("config.ron")?)?;
 	let layout = decode_layout(&std::fs::read_to_string("layout.txt")?);
 	let mut extensions: HashMap<String, String> = HashMap::new();
+	if config.layout != PaperType::a4paper && config.layout != PaperType::letterpaper {
+		eprintln!("Warning: by ICPC rules notebook must be either a4 or letter paper");
+	}
 	for i in layout.iter() {
 		if let LineType::File(x) = i {
 			let ext = get_extension(x);
@@ -198,7 +202,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	writeln!(tex, "\\renewcommand*\\familydefault{{\\sfdefault}}")?;
 	writeln!(tex, "\\usepackage[T1]{{fontenc}}")?;
 	writeln!(tex, "\\pagestyle{{fancy}}")?;
-	writeln!(tex, "\\lhead{{{}}}", config.title)?;
+	writeln!(tex, "\\lhead{{{} - {}}}", config.university, config.team)?;
 	writeln!(tex, "\\rhead{{Page: \\thepage}}")?;
 	writeln!(tex, "\\cfoot{{}}")?;
 	writeln!(
@@ -219,7 +223,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 	writeln!(tex, "\\author{{{}}}", config.author)?;
 	writeln!(tex, "\\date{{\\ddmmyyyydate{{\\today{{}}}}}}")?;
 	for i in extensions.iter() {
-		writeln!(tex,"\\newminted{{{}}}{{tabsize={},linenos={},mathescape={},autogobble={},showspaces={},showtabs={},breaklines={},breakanywhere={},breakautoindent={},fontfamily={},frame={},framerule={},style={},numbersep={},framesep={}}}",i.1,config.tabsize,config.linenos,config.mathescape,config.autogobble,config.showspaces,config.showtabs,config.breaklines,config.breakanywhere,config.breakautoindent,config.fontfamily,config.frame.to_string(),config.framerule,config.style,config.numbersep,config.framesep)?;
+		writeln!(tex,"\\newminted{{{}}}{{tabsize={},linenos={},mathescape={},autogobble={},showspaces={},showtabs={},breaklines={},breakanywhere={},breakautoindent={},frame={},framerule={},style={},numbersep={},framesep={}}}",i.1,config.tabsize,config.linenos,config.mathescape,config.autogobble,config.showspaces,config.showtabs,config.breaklines,config.breakanywhere,config.breakautoindent,config.frame.to_string(),config.framerule,config.style,config.numbersep,config.framesep)?;
 	}
 	writeln!(tex, "\\begin{{document}}")?;
 	writeln!(tex, "\\thispagestyle{{fancy}}")?;

@@ -1,5 +1,5 @@
 Config(
-	layout: a4paper,
+	layout: a4paper, // only a4paper and letterpaper are allowed by ICPC rules
 	landscape: true,
 	lmargin: "1mm", // left margin
 	rmargin: "1mm", // right margin
@@ -12,26 +12,27 @@ Config(
 	footskip: "3mm", // foot separation
 	title: "ICPC Notebook",
 	author: "Me",
-	ncols: 3,         // number of columns for code
-	ncolstoc: 3,      // number of columns for table of contents
+	university: "University Of Nowhere", // university name
+	team: "Tim", // team name
+	ncols: 3, // number of columns for code
+	ncolstoc: 3, // number of columns for table of contents
 	columnsep: "1mm", // columns separation
 	separatetoc: false, // wether to put the table of contents on a separate page
 	fontsize: "8pt",
 	// minted options:
 	tabsize: 2,
 	linenos: false,
-	numbersep: "0pt",        // numbers distance
-	mathescape: false,      // use math in comments
-	autogobble: true,      // remove unecessary whitespace
-	showspaces: false,      // render spaces with another character
-	showtabs: false,        // render tabs with another character
-	breaklines: true,      // allow linebreaks
-	breakanywhere: true,   // allow linebreaks anywhere
+	numbersep: "0pt", // numbers distance
+	mathescape: false, // use math in comments
+	autogobble: true, // remove unecessary whitespace
+	showspaces: false, // render spaces with another character
+	showtabs: false, // render tabs with another character
+	breaklines: true, // allow linebreaks
+	breakanywhere: true, // allow linebreaks anywhere
 	breakautoindent: false, // indent broken lines
-	fontfamily: "tt",
-	frame: single,  //none,leftline,topline,bottomline,lines,single
-	framesep: "2pt",    // distance between frame and content inside
+	frame: single, // none, leftline, topline, bottomline, lines, single
+	framesep: "2pt", // distance between frame and content inside
 	framerule: "0.2pt", // frame thickness
-	style: "algol_nu",     // pygmentize -L styles
+	style: "algol_nu", // pygmentize -L styles
 )
 
