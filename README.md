@@ -8,6 +8,10 @@ The default configuration should be compliant to [ICPC world finals rules](https
 
 To then compile to pdf you can do
 ```sh
+tectonic -Z shell-escape out.tex
+```
+or
+```sh
 pdflatex --shell-escape out.tex
 ```
 
